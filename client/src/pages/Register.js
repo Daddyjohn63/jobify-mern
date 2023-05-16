@@ -22,7 +22,7 @@ const Register = () => {
   //const state = useAppContext();
   //console.log(state);   //to test if global state is available.
 
-  const { user, isLoading, showAlert, displayAlert, registerUser } =
+  const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } =
     useAppContext();
   //above is destructuring of state coming from our custom hook useAppContext()
 
@@ -46,7 +46,7 @@ const Register = () => {
     }
     const currentUser = { name, email, password };
     if (isMember) {
-      console.log('already a member');
+      loginUser(currentUser);
     } else {
       registerUser(currentUser);
     }
