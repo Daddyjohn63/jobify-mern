@@ -72,7 +72,7 @@ const Register = () => {
           <FormRow
             type="text"
             name="name"
-            values={values.name}
+            value={values.name}
             handleChange={handleChange}
           />
         )}
@@ -81,7 +81,7 @@ const Register = () => {
         <FormRow
           type="email"
           name="email"
-          values={values.email}
+          value={values.email}
           handleChange={handleChange}
         />
 
@@ -89,7 +89,7 @@ const Register = () => {
         <FormRow
           type="password"
           name="password"
-          values={values.password}
+          value={values.password}
           handleChange={handleChange}
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
