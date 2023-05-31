@@ -12,7 +12,9 @@ import {
   REGISTER_USER_ERROR,
   LOGIN_USER_BEGIN,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR
+  LOGIN_USER_ERROR,
+  TOGGLE_SIDEBAR,
+  LOGOUT_USER
 } from './actions';
 
 const user = localStorage.getItem('user');
@@ -27,7 +29,8 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: userLocation || '',
-  jobLocation: userLocation || ''
+  jobLocation: userLocation || '',
+  showSidebar: false
 };
 
 const AppContext = React.createContext();
@@ -63,7 +66,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
       const response = await axios.post('/api/v1/auth/register', currentUser);
-      console.log(response);
+      //console.log(response);
       const { user, token, location } = response.data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
@@ -79,8 +82,9 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
+  //currentUser is the data we will submit to the server, captured from the form.
   const loginUser = async currentUser => {
+    //console.log[currentUser);
     dispatch({ type: LOGIN_USER_BEGIN });
     try {
       const { data } = await axios.post('/api/v1/auth/login', currentUser);
@@ -101,10 +105,26 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
+  };
+
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT_USER });
+    removeUserFromLocalStorage();
+  };
+
   return (
     //this is how our props are passed down to our children..
     <AppContext.Provider
-      value={{ ...state, displayAlert, registerUser, loginUser }}
+      value={{
+        ...state,
+        displayAlert,
+        registerUser,
+        loginUser,
+        toggleSidebar,
+        logoutUser
+      }}
     >
       {children}
     </AppContext.Provider>
@@ -114,5 +134,5 @@ const AppProvider = ({ children }) => {
 const useAppContext = () => {
   return useContext(AppContext);
 };
-
+//console.log(initialState);
 export { AppProvider, initialState, useAppContext };

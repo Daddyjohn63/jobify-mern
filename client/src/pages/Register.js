@@ -5,6 +5,7 @@ import Wrapper from '../assets/wrappers/RegisterPage';
 import { useAppContext } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
 
+//console.log(useAppContext);
 const initialState = {
   name: '',
   email: '',
@@ -50,7 +51,7 @@ const Register = () => {
     } else {
       registerUser(currentUser);
     }
-    console.log(values);
+    //console.log(values);
   };
   //when user successful redirect to the home page
   useEffect(() => {

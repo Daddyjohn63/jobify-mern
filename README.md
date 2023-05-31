@@ -2244,21 +2244,20 @@ npm install react-icons
 ```
 
 ```js
-Navbar.js
+Navbar.js;
 
-import Wrapper from '../assets/wrappers/Navbar'
-import {FaHome} from 'react-icons/fa'
+import Wrapper from '../assets/wrappers/Navbar';
+import { FaHome } from 'react-icons/fa';
 const Navbar = () => {
   return (
     <Wrapper>
       <h4>navbar</h4>
-      <FaHome>
+      <FaHome />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default Navbar;
 ```
 
 #### Navbar Setup
